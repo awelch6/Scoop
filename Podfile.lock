@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (4.7.3)
+  - lottie-ios (2.5.2)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - lottie-ios
+  - SnapKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - lottie-ios
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: bd878a814061d0617ff0dd901610e27ef3e4e48e
+
+COCOAPODS: 1.5.3

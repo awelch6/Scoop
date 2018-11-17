@@ -1,0 +1,5 @@
+pairs:
+  ca: Commit Author; email
+email:
+  prefix: pair
+  domain: email.com
