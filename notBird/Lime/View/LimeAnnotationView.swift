@@ -30,7 +30,7 @@ class LimeAnnotationView : MKAnnotationView {
   
   private func configureView() {
     addSubview(batteryIndicator)
-    image = UIImage(named: "grapefruit")
+    image = notBirdAnnotation?.image
     batteryIndicator.backgroundColor = self.notBirdAnnotation?.batteryColor
   }
 }

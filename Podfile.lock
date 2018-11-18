@@ -1,24 +1,33 @@
 PODS:
   - Alamofire (4.7.3)
   - lottie-ios (2.5.2)
+  - PhoneNumberKit (2.5.0):
+    - PhoneNumberKit/PhoneNumberKitCore (= 2.5.0)
+    - PhoneNumberKit/UIKit (= 2.5.0)
+  - PhoneNumberKit/PhoneNumberKitCore (2.5.0)
+  - PhoneNumberKit/UIKit (2.5.0):
+    - PhoneNumberKit/PhoneNumberKitCore
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - lottie-ios
+  - PhoneNumberKit (~> 2.5)
   - SnapKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - lottie-ios
+    - PhoneNumberKit
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
+  PhoneNumberKit: 32a1cd1e0aa9e950feb01886a22fd7386b8cf903
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: bd878a814061d0617ff0dd901610e27ef3e4e48e
+PODFILE CHECKSUM: 3ad9f51caa21ada995d664c26ca8b021feb1ef34
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1

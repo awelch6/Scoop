@@ -3,43 +3,46 @@
 //  notBird
 //
 
-
-import Foundation
 import Alamofire
 
 class SpinAuthenticationService {
+	
 	static let shared = SpinAuthenticationService()
 	
-	typealias token = String?
-	typealias SpinAuthCompletionBlock = (token) -> Void
+	typealias SpinAuthCompletionBlock = (Error?) -> Void
 	
-	
-	private let headers: HTTPHeaders = ["Content-Type" : "application/json"]
-	
-	private var params : Parameters {
-		let randomNum = arc4random_uniform(10000) + 1;
-		return [
-			"email" : ["email" : "email\(randomNum)@asd\(randomNum).com", "password" : randomNum],
+	public func authenticate(with email: String, password: String, completion: @escaping SpinAuthCompletionBlock) {
+		
+		let headers: HTTPHeaders = [
+			"Content-Type" : "application/json"
+		]
+		
+		let params : Parameters = [
+			"email" : [
+				"email" : email, "password" : password
+			],
 			"isApplePayDefault" : false,
 			"grantType" : "email"
 		]
-	}
-	
-	public func Auth(completion: @escaping SpinAuthCompletionBlock) {
+		
 		Alamofire.request(URL(string: "https://web.spin.pm/api/v1/auth_tokens")!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
 			if let error = response.error {
-				print(error.localizedDescription)
-				completion(nil)
+				completion(error)
 			} else if let data = response.data {
 				do {
-					guard let response = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any],
-						let token = response["jwt"] as? String else { print("ERROR PARSING"); return completion(nil) }
-					completion(token)
-				} catch let error {
-					print(error.localizedDescription)
+					guard let response = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else { return completion(nil) }
+					self.storeAuthenticationData(spinAuthentication: SpinAuthentication(dictionary: response))
 					completion(nil)
+				} catch let error {
+					completion(error)
 				}
 			}
 		}
+	}
+	private func storeAuthenticationData(spinAuthentication: SpinAuthentication) {
+		let userDefaults = UserDefaults.standard
+		userDefaults.set(spinAuthentication.token, forKey: SpinConstants.SPN_TKN)
+		userDefaults.set(spinAuthentication.refreshToken, forKey: SpinConstants.SPN_RFSHTKN)
+		userDefaults.set(spinAuthentication.existingAccount, forKey: SpinConstants.SPN_EXST)
 	}
 }

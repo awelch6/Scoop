@@ -12,16 +12,21 @@ class LimeService {
 	
 	typealias LimeResponseCompletionBlock = ([Lime]?) -> Void
 	
-	private func getLimeLocations(with token: String, completion: @escaping LimeResponseCompletionBlock) {
+	public func getLimeLocations(completion: @escaping LimeResponseCompletionBlock) {
+		
+		let token = UserDefaults.standard.value(forKey: LimeConstants.LME_TKN) as! String
+		
 		let headers: HTTPHeaders = [
-			"Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX3Rva2VuIjoiNU9NM1NDVU0yRUIzVyIsImxvZ2luX2NvdW50IjoxM30.mqk3W6DdPRyFcXp4nW001rUTFiG-poc2LqLEq_FMiFo",
+			"Authorization" : "Bearer \(token)",
 			]
+		
 		let params : [String : Any] = [
 			"map_center_latitude" : 42.332950,
 			"map_center_longitude" : -83.049454,
 			"user_latitude" : 42.332950,
 			"user_longitude" : -83.049454,
 			]
+		
 		Alamofire.request(URL(string: "https://web-production.lime.bike/api/rider/v1/views/main")!, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
 			if response.error != nil {
 				completion(nil)
@@ -63,19 +68,4 @@ class LimeService {
 		}
 		return Lime(id: id, attributes: attributes)
 	}
-	
-	public func getLimes(_ completion: @escaping LimeResponseCompletionBlock) {
-		//    LimeAuthenticationService.shared.Auth { (token) in
-		//      if let token = token {
-		//      print(token)
-		self.getLimeLocations(with: "token", completion: { (limes) in
-			if let limes = limes {
-				completion(limes)
-			}
-			completion(nil)
-		})
-	}
-	//   completion(nil)
-	//    }
-	//  }
 }

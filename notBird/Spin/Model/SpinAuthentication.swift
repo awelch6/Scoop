@@ -1,11 +1,15 @@
 //
-//  SPinAuthentication.swift
+//  SpinAuthentication.swift
 //  notBird
-//
 
-
-import Foundation
-
-struct SpinAuth : Decodable {
-  let jwt : String
+struct SpinAuthentication {
+	let token : String
+	let existingAccount: Int
+	let refreshToken: String
+	
+	init(dictionary: [String : Any]){
+		self.token = dictionary["jwt"] as! String
+		self.refreshToken = dictionary["refreshToken"] as! String
+		self.existingAccount = dictionary["existingAccount"] as! Int
+	}
 }

@@ -12,8 +12,13 @@ class SpinService {
   
   typealias SpinResponseCompletionBlock = ([Spin]?) -> Void
 
-  private func getSpinLocations(with token: String, completion: @escaping SpinResponseCompletionBlock) {
-	let headers: HTTPHeaders = ["Authorization" : "Bearer \(token)"]
+  public func getSpinLocations(completion: @escaping SpinResponseCompletionBlock) {
+	
+	let token = UserDefaults.standard.value(forKey: SpinConstants.SPN_TKN) as! String
+
+	let headers: HTTPHeaders = [
+		"Authorization" : "Bearer \(token)"
+	]
     
     let params : [String : Any] = [
       "lat": 42.332950,
@@ -37,18 +42,5 @@ class SpinService {
         }
       }
     }
-  }
-	
-  public func getSpins(_ completion: @escaping SpinResponseCompletionBlock) {
-    SpinAuthenticationService.shared.Auth { (token) in
-      if let token = token {
-        self.getSpinLocations(with: token, completion: { (spins) in
-          if let spins = spins {
-            completion(spins)
-          }
-        })
-      }
-    }
-    completion(nil)
   }
 }

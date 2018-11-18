@@ -29,7 +29,7 @@ class SpinAnnotationView : MKAnnotationView {
 	
 	private func configureView() {
 		addSubview(batteryIndicator)
-		image = UIImage(named: "spin")
+		image = notBirdAnnotation?.image
 		batteryIndicator.backgroundColor = self.notBirdAnnotation?.batteryColor
 	}
 }

@@ -3,7 +3,6 @@
 //  notBird
 //
 
-
 import UIKit
 
 class BaseView : UIView {

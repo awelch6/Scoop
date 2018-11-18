@@ -33,15 +33,16 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 		super.viewDidLoad()
 		
 		let location = CLLocationCoordinate2D(latitude: 42.332950, longitude: -83.049454)
+		
+		mapView.delegate = self
 		mapView.setCenter(location, animated: true)
 		mapView.setRegion(MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: true)
-		mapView.delegate = self
 		
 		mapView.register(BirdAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
 		mapView.register(LimeAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
 		mapView.register(BirdClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
 		
-		BirdService.shared.getBirds { (birds) in
+		BirdService.shared.getBirdLocations { (birds) in
 			if let birds = birds {
 				for bird in birds {
 					let pin = NotBirdAnnotation()
@@ -54,7 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 				}
 			}
 		}
-		LimeService.shared.getLimes { (limes) in
+		LimeService.shared.getLimeLocations { (limes) in
 			if let limes = limes {
 				for lime in limes {
 					let pin = NotBirdAnnotation()
@@ -68,9 +69,8 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 			}
 		}
 
-		SpinService.shared.getSpins { (spins) in
+		SpinService.shared.getSpinLocations { (spins) in
 			if let spins = spins {
-				print(spins.count)
 				for spin in spins {
 					let pin = NotBirdAnnotation()
 					pin.image = UIImage(named: "spin")
@@ -110,9 +110,11 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 	func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
 		return NotBirdCluster(memberAnnotations: memberAnnotations)
 	}
+	
+	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+		print("Selected a view")
+	}
 }
-
-
 
 class NotBirdCluster : MKClusterAnnotation {
 	//add custom Cluster properties
