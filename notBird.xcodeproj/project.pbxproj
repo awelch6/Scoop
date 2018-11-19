@@ -48,6 +48,12 @@
 		840D383C21A103A00006EC29 /* VerificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D383B21A103A00006EC29 /* VerificationButton.swift */; };
 		840D383E21A103DD0006EC29 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D383D21A103DD0006EC29 /* BaseButton.swift */; };
 		840D384021A112190006EC29 /* LimeAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D383F21A112190006EC29 /* LimeAuthentication.swift */; };
+		840D384221A119600006EC29 /* SignInHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384121A119600006EC29 /* SignInHandler.swift */; };
+		840D384721A23CE60006EC29 /* NotBirdClusterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384621A23CE60006EC29 /* NotBirdClusterAnnotation.swift */; };
+		840D384921A23D280006EC29 /* NotBirdAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384821A23D280006EC29 /* NotBirdAnnotation.swift */; };
+		840D384B21A244BA0006EC29 /* BirdAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384A21A244BA0006EC29 /* BirdAnnotation.swift */; };
+		840D384D21A247920006EC29 /* LimeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384C21A247920006EC29 /* LimeAnnotation.swift */; };
+		840D384F21A247B50006EC29 /* SpinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D384E21A247B50006EC29 /* SpinAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +114,12 @@
 		840D383B21A103A00006EC29 /* VerificationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationButton.swift; sourceTree = "<group>"; };
 		840D383D21A103DD0006EC29 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		840D383F21A112190006EC29 /* LimeAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimeAuthentication.swift; sourceTree = "<group>"; };
+		840D384121A119600006EC29 /* SignInHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHandler.swift; sourceTree = "<group>"; };
+		840D384621A23CE60006EC29 /* NotBirdClusterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotBirdClusterAnnotation.swift; sourceTree = "<group>"; };
+		840D384821A23D280006EC29 /* NotBirdAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotBirdAnnotation.swift; sourceTree = "<group>"; };
+		840D384A21A244BA0006EC29 /* BirdAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdAnnotation.swift; sourceTree = "<group>"; };
+		840D384C21A247920006EC29 /* LimeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimeAnnotation.swift; sourceTree = "<group>"; };
+		840D384E21A247B50006EC29 /* SpinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinAnnotation.swift; sourceTree = "<group>"; };
 		889242723CECC0DFB2028B9D /* Pods-notBirdTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notBirdTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-notBirdTests/Pods-notBirdTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BEEB5399F5DAAF0CC6E2CCE9 /* Pods-notBirdTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notBirdTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-notBirdTests/Pods-notBirdTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +149,7 @@
 			children = (
 				693A7A27219DBB99008FCA79 /* Lime.swift */,
 				840D383F21A112190006EC29 /* LimeAuthentication.swift */,
+				840D384C21A247920006EC29 /* LimeAnnotation.swift */,
 				840D382621A100390006EC29 /* LimeConstants.swift */,
 			);
 			path = Model;
@@ -202,6 +215,7 @@
 				6993EEF6219CBCF90068C309 /* Bird */,
 				6993EEFC219CBD890068C309 /* Spin */,
 				6993EED1219C7D580068C309 /* Info.plist */,
+				840D384121A119600006EC29 /* SignInHandler.swift */,
 				693A7A2F219F02A8008FCA79 /* resources */,
 			);
 			path = notBird;
@@ -272,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				6993EEE5219C88AC0068C309 /* Bird.swift */,
+				840D384A21A244BA0006EC29 /* BirdAnnotation.swift */,
 				6993EF07219CBFAB0068C309 /* BirthAuthentication.swift */,
 				840D382421A1002F0006EC29 /* BirdConstants.swift */,
 			);
@@ -283,6 +298,7 @@
 			children = (
 				6993EF0A219CC0020068C309 /* Spin.swift */,
 				840D381E21A0FC280006EC29 /* SpinAuthentication.swift */,
+				840D384E21A247B50006EC29 /* SpinAnnotation.swift */,
 				840D382221A100240006EC29 /* SpinConstants.swift */,
 			);
 			path = Model;
@@ -309,6 +325,8 @@
 		840D382A21A100910006EC29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				840D384621A23CE60006EC29 /* NotBirdClusterAnnotation.swift */,
+				840D384821A23D280006EC29 /* NotBirdAnnotation.swift */,
 				840D382B21A100990006EC29 /* Constants.swift */,
 			);
 			path = Model;
@@ -408,6 +426,7 @@
 				TargetAttributes = {
 					6993EEC1219C7D570068C309 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1010;
 					};
 					6993EED5219C7D580068C309 = {
 						CreatedOnToolsVersion = 10.0;
@@ -499,6 +518,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-notBird/Pods-notBird-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
 				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
@@ -506,6 +526,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
@@ -527,10 +548,12 @@
 				693A7A33219F0574008FCA79 /* NotBirdMapView.swift in Sources */,
 				840D383721A101470006EC29 /* VerificationTextField.swift in Sources */,
 				840D382721A100390006EC29 /* LimeConstants.swift in Sources */,
+				840D384921A23D280006EC29 /* NotBirdAnnotation.swift in Sources */,
 				6993EF08219CBFAB0068C309 /* BirthAuthentication.swift in Sources */,
 				6993EEC8219C7D570068C309 /* MapViewController.swift in Sources */,
 				840D382521A1002F0006EC29 /* BirdConstants.swift in Sources */,
 				6993EEF0219CA2F00068C309 /* BirdAnnotationView.swift in Sources */,
+				840D384F21A247B50006EC29 /* SpinAnnotation.swift in Sources */,
 				840D381F21A0FC280006EC29 /* SpinAuthentication.swift in Sources */,
 				6993EEC6219C7D570068C309 /* AppDelegate.swift in Sources */,
 				693A7A28219DBB99008FCA79 /* Lime.swift in Sources */,
@@ -538,6 +561,7 @@
 				840D381821A0972A0006EC29 /* SpinAnnotationView.swift in Sources */,
 				6993EEF2219CA3640068C309 /* BaseView.swift in Sources */,
 				6993EEFE219CBDA00068C309 /* SpinAuthenticationService.swift in Sources */,
+				840D384D21A247920006EC29 /* LimeAnnotation.swift in Sources */,
 				840D382121A0FFD10006EC29 /* VerificationViewController.swift in Sources */,
 				6993EEE6219C88AC0068C309 /* Bird.swift in Sources */,
 				840D383A21A1036A0006EC29 /* SignInButton.swift in Sources */,
@@ -546,14 +570,17 @@
 				6993EEFB219CBD350068C309 /* LimeService.swift in Sources */,
 				693A7A2E219F01F1008FCA79 /* LimeAnnotationView.swift in Sources */,
 				840D384021A112190006EC29 /* LimeAuthentication.swift in Sources */,
+				840D384B21A244BA0006EC29 /* BirdAnnotation.swift in Sources */,
 				6993EEF9219CBD2C0068C309 /* LimeAuthenticationService.swift in Sources */,
 				6993EEED219C93450068C309 /* BirdService.swift in Sources */,
+				840D384721A23CE60006EC29 /* NotBirdClusterAnnotation.swift in Sources */,
 				693A7A39219F1A1F008FCA79 /* BirdClusterView.swift in Sources */,
 				6993EEF5219CBB770068C309 /* Int.swift in Sources */,
 				693A7A3B219F1AD8008FCA79 /* LimeClusterView.swift in Sources */,
 				840D383521A1013C0006EC29 /* BaseTextField.swift in Sources */,
 				6993EF00219CBDA70068C309 /* SpinService.swift in Sources */,
 				840D381D21A0A43E0006EC29 /* SignInViewController.swift in Sources */,
+				840D384221A119600006EC29 /* SignInHandler.swift in Sources */,
 				6993EF0B219CC0020068C309 /* Spin.swift in Sources */,
 				840D383E21A103DD0006EC29 /* BaseButton.swift in Sources */,
 				840D382C21A100990006EC29 /* Constants.swift in Sources */,
@@ -711,6 +738,7 @@
 			baseConfigurationReference = 3B319864A33DA88D0A077270 /* Pods-notBird.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BUCK63XF34;
 				INFOPLIST_FILE = notBird/Info.plist;
@@ -720,6 +748,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = notBird.notBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "notBird/notBird-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -730,6 +760,7 @@
 			baseConfigurationReference = 7FB71775D516F59641882F5F /* Pods-notBird.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BUCK63XF34;
 				INFOPLIST_FILE = notBird/Info.plist;
@@ -739,6 +770,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = notBird.notBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "notBird/notBird-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
