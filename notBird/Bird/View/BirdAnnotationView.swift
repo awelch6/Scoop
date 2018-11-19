@@ -9,16 +9,16 @@ import MapKit
 
 class BirdAnnotationView : MKAnnotationView {
 
-  private let notBirdAnnotation : NotBirdAnnotation?
+  public let birdAnnotation : BirdAnnotation?
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-    self.notBirdAnnotation = annotation as? NotBirdAnnotation
+    birdAnnotation = annotation as? BirdAnnotation
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-    clusteringIdentifier = "bird"
+    clusteringIdentifier = "scooter"
 
     configureView()
   }
@@ -31,7 +31,7 @@ class BirdAnnotationView : MKAnnotationView {
   
   private func configureView() {
     addSubview(batteryIndicator)
-    image = notBirdAnnotation?.image
-    batteryIndicator.backgroundColor = self.notBirdAnnotation?.batteryColor
+	image = UIImage(named: "scooter")
+    batteryIndicator.backgroundColor = birdAnnotation?.bird.batteryLevelColor
   }
 }

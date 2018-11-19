@@ -21,12 +21,10 @@ class MapViewController: UIViewController  {
 		BirdService.shared.getBirdLocations(location: mapView.currentUserLocation) { (birds) in
 			if let birds = birds {
 				for bird in birds {
-					let pin = NotBirdAnnotation()
-					pin.image = UIImage(named: "bird")
-					pin.type = "bird"
-					pin.batteryColor = bird.battery_level.getColorForBatteryLevel()
+					let pin = BirdAnnotation()
+					pin.bird = bird
 					pin.coordinate = CLLocationCoordinate2D(latitude: bird.location.latitude, longitude: bird.location.longitude)
-					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "bird")
+					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "scooter")
 					self.mapView.addAnnotation(annotation.annotation!)
 				}
 			}
@@ -34,12 +32,10 @@ class MapViewController: UIViewController  {
 		LimeService.shared.getLimeLocations(location: mapView.currentUserLocation) { (limes) in
 			if let limes = limes {
 				for lime in limes {
-					let pin = NotBirdAnnotation()
-					pin.image = UIImage(named: "lime")
-					pin.type = "lime"
-					pin.batteryColor = lime.batteryLevelColor
+					let pin = LimeAnnotation()
+					pin.lime = lime
 					pin.coordinate = CLLocationCoordinate2D(latitude: lime.latitude , longitude: lime.longitude)
-					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "lime")
+					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "scooter")
 					self.mapView.addAnnotation(annotation.annotation!)
 				}
 			}
@@ -48,12 +44,10 @@ class MapViewController: UIViewController  {
 		SpinService.shared.getSpinLocations(location: mapView.currentUserLocation) { (spins) in
 			if let spins = spins {
 				for spin in spins {
-					let pin = NotBirdAnnotation()
-					pin.image = UIImage(named: "spin")
-					pin.type = "spin"
-					pin.batteryColor = spin.batteryLevelColor
+					let pin = SpinAnnotation()
+					pin.spin = spin
 					pin.coordinate = CLLocationCoordinate2D(latitude: spin.latitude , longitude: spin.longitude)
-					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "spin")
+					let annotation = MKPinAnnotationView(annotation: pin, reuseIdentifier: "scooter")
 					self.mapView.addAnnotation(annotation.annotation!)
 				}
 			}

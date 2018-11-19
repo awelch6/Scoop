@@ -23,7 +23,6 @@ class NotBirdMapView : MKMapView {
 	
 	private func configureView() {
 		delegate = self
-		
 		setupLocationManager()
 		setupProperties()
 	}
@@ -48,26 +47,18 @@ class NotBirdMapView : MKMapView {
 }
 extension NotBirdMapView : MKMapViewDelegate {
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-		if annotation is MKUserLocation {
+		switch annotation {
+		case _ where annotation is BirdAnnotation:
+			return BirdAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+		case _ where annotation is LimeAnnotation:
+			return LimeAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+		case _ where annotation is SpinAnnotation:
+			return SpinAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+		case _ where annotation is NotBirdCluster:
+			return BirdClusterView(annotation: annotation, reuseIdentifier: "birdCluster")
+		default:
 			return nil
 		}
-		if let annotation = annotation as? NotBirdAnnotation {
-			switch annotation.type {
-			case "bird":
-				return BirdAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			case "lime":
-				return LimeAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			case "spin":
-				return SpinAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			default:
-				return nil
-			}
-		}
-		
-		if let cluster = annotation as? NotBirdCluster {
-			return BirdClusterView(annotation: cluster, reuseIdentifier: "birdCluster")
-		}
-		return nil
 	}
 	
 	func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
@@ -75,16 +66,25 @@ extension NotBirdMapView : MKMapViewDelegate {
 	}
 	
 	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-		print("Selected a view")
+		switch view {
+		case _ where view is BirdAnnotationView:
+			print((view as? BirdAnnotationView)?.birdAnnotation?.bird as Any)
+		case _ where view is LimeAnnotationView:
+			print((view as? LimeAnnotationView)?.limeAnnotation?.lime as Any)
+		case _ where view is SpinAnnotationView:
+			print((view as? SpinAnnotationView)?.spinAnnotation?.spin as Any)
+		default:
+			break
+		}
 	}
 }
 
 extension NotBirdMapView : CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		if status == .authorizedWhenInUse || status == .authorizedAlways {
-			print("location services status = ", status)
+			//TODO: ...
 		} else if status == .denied || status == .restricted {
-			print("Locaiton services disabled.")
+			//TODO: handle when location services are disabled.
 		}
 	}
 	
