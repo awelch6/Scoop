@@ -29,7 +29,6 @@ class SignInView : UIView {
 	let emailTextField = EmailTextField()
 	let passwordTextField = PasswordTextField()
 	let signInButton = SignInButton()
-	
 	var delegate : SignInDelegate?
 	
 	func configureView() {
@@ -97,7 +96,6 @@ class SignInView : UIView {
 
 class SignInViewController: UIViewController, SignInDelegate {
 
-	
 	var signInView : SignInView!
 	
 	override func viewDidLoad() {
@@ -110,25 +108,24 @@ class SignInViewController: UIViewController, SignInDelegate {
 	func signInWasSuccessful(phoneNumber: String, email: String, password: String) {
 		let group = DispatchGroup()
 
-		print(phoneNumber)
 		setUserDefaults(phone: phoneNumber, email: email, password: password)
 		
 		group.enter()
-		BirdAuthenticationService.shared.authenticate(with: email) { (error) in
+		BirdAuthenticationService.shared.authenticate { (error) in
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			group.leave()
 		}
 		group.enter()
-		SpinAuthenticationService.shared.authenticate(with: email, password: password) { (error) in
+		SpinAuthenticationService.shared.authenticate { (error) in
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			group.leave()
 		}
 		group.enter()
-		LimeAuthenticationService.shared.retreiveVerificationCode(with: phoneNumber) { (error) in
+		LimeAuthenticationService.shared.retreiveVerificationCode { (error) in
 			if let error = error {
 				print(error.localizedDescription)
 			}

@@ -4,7 +4,7 @@
 //
 
 
-import Foundation
+import CoreLocation.CLLocation
 import Alamofire
 
 class LimeService {
@@ -12,7 +12,7 @@ class LimeService {
 	
 	typealias LimeResponseCompletionBlock = ([Lime]?) -> Void
 	
-	public func getLimeLocations(completion: @escaping LimeResponseCompletionBlock) {
+	public func getLimeLocations(location: CLLocationCoordinate2D,completion: @escaping LimeResponseCompletionBlock) {
 		
 		let token = UserDefaults.standard.value(forKey: LimeConstants.LME_TKN) as! String
 		
@@ -21,13 +21,13 @@ class LimeService {
 			]
 		
 		let params : [String : Any] = [
-			"map_center_latitude" : 42.332950,
-			"map_center_longitude" : -83.049454,
-			"user_latitude" : 42.332950,
-			"user_longitude" : -83.049454,
+			"map_center_latitude" : location.latitude,
+			"map_center_longitude" : location.longitude,
+			"user_latitude" : location.latitude,
+			"user_longitude" : location.longitude,
 			]
 		
-		Alamofire.request(URL(string: "https://web-production.lime.bike/api/rider/v1/views/main")!, method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+		Alamofire.request(URL(string: "https://web-production.lime.bike/api/rider/v1/views/main")!, method: .get, parameters: params, headers: headers).responseJSON { (response) in
 			if response.error != nil {
 				completion(nil)
 			} else if let data = response.data {
@@ -51,6 +51,7 @@ class LimeService {
 				let attributes = data["attributes"] as? [String : Any],
 				let nearbyLimes = attributes["nearby_locked_bikes"] as? [[String : Any]]
 				else {
+					print("Error: could not parse Lime API response.")
 					return nil
 			}
 			return nearbyLimes
@@ -64,6 +65,7 @@ class LimeService {
 		guard let id = limeObject["id"] as? String,
 			let attributes = limeObject["attributes"] as? [String : Any]
 			else {
+				print("Error: could not parse Lime object.")
 				return nil
 		}
 		return Lime(id: id, attributes: attributes)

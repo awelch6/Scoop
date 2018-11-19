@@ -3,46 +3,22 @@
 //  notBird
 //
 
-
 import UIKit
 import MapKit
 
-enum AnnotationType : String {
-	case bird = "bird"
-	case spin = "spin"
-	case lime = "lime"
-	case jelly  = "jelly"
-}
-
-
-class NotBirdAnnotation : MKPointAnnotation {
-	var type : String!
-	var batteryColor : UIColor?
-	var image : UIImage?
-}
-
-class MapViewController: UIViewController, MKMapViewDelegate  {
+class MapViewController: UIViewController  {
 	var mapView : NotBirdMapView!
-	
+
 	override func loadView() {
 		super.loadView()
 		mapView = NotBirdMapView(frame: UIScreen.main.bounds)
 		self.view.addSubview(mapView)
 	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let location = CLLocationCoordinate2D(latitude: 42.332950, longitude: -83.049454)
-		
-		mapView.delegate = self
-		mapView.setCenter(location, animated: true)
-		mapView.setRegion(MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: true)
-		
-		mapView.register(BirdAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-		mapView.register(LimeAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-		mapView.register(BirdClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-		
-		BirdService.shared.getBirdLocations { (birds) in
+		BirdService.shared.getBirdLocations(location: mapView.currentUserLocation) { (birds) in
 			if let birds = birds {
 				for bird in birds {
 					let pin = NotBirdAnnotation()
@@ -55,7 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 				}
 			}
 		}
-		LimeService.shared.getLimeLocations { (limes) in
+		LimeService.shared.getLimeLocations(location: mapView.currentUserLocation) { (limes) in
 			if let limes = limes {
 				for lime in limes {
 					let pin = NotBirdAnnotation()
@@ -69,7 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 			}
 		}
 
-		SpinService.shared.getSpinLocations { (spins) in
+		SpinService.shared.getSpinLocations(location: mapView.currentUserLocation) { (spins) in
 			if let spins = spins {
 				for spin in spins {
 					let pin = NotBirdAnnotation()
@@ -82,43 +58,5 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
 				}
 			}
 		}
-	}
-	
-	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-		if annotation is MKUserLocation {
-			return nil
-		}
-		if let annotation = annotation as? NotBirdAnnotation {
-			switch annotation.type {
-			case "bird":
-				return BirdAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			case "lime":
-				return LimeAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			case "spin":
-				return SpinAnnotationView(annotation: annotation, reuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-			default:
-				return nil
-			}
-		}
-		
-		if let cluster = annotation as? NotBirdCluster {
-			return BirdClusterView(annotation: cluster, reuseIdentifier: "birdCluster")
-		}
-		return nil
-	}
-	
-	func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
-		return NotBirdCluster(memberAnnotations: memberAnnotations)
-	}
-	
-	func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-		print("Selected a view")
-	}
-}
-
-class NotBirdCluster : MKClusterAnnotation {
-	//add custom Cluster properties
-	override init(memberAnnotations: [MKAnnotation]) {
-		super.init(memberAnnotations: memberAnnotations)
 	}
 }

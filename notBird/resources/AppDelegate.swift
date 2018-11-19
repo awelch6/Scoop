@@ -3,7 +3,6 @@
 //  notBird
 //
 
-
 import UIKit
 import Alamofire
 
@@ -13,12 +12,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    window = UIWindow(frame: UIScreen.main.bounds)
-	let navigationController = UINavigationController(rootViewController: SignInViewController())
+	
+	var navigationController = UINavigationController(rootViewController: SignInViewController())
+	
+	if UserDefaults.standard.value(forKey: Constants.PHN_KEY) != nil {
+		navigationController = UINavigationController(rootViewController: MapViewController())
+	}
+	
+	if SpinAuthenticationService.shared.needsRefresh {
+		print("Refreshing Spin token...")
+		SpinAuthenticationService.shared.refreshSpinToken { (error) in
+			if let error = error {
+				print(error.localizedDescription)
+			}
+		}
+	}
+	
+//	if BirdAuthenticationService.shared.needsRefresh {
+//		print("Refreshing bird...")
+//		BirdAuthenticationService.shared.getExisitingBirdAccount { (error) in
+//			if let error = error {
+//				print(error.localizedDescription)
+//			}
+//		}
+//	}
+	
+	window = UIWindow(frame: UIScreen.main.bounds)
 	navigationController.navigationBar.isTranslucent = false
+	navigationController.isNavigationBarHidden = true
 	self.window?.rootViewController = navigationController
     window!.makeKeyAndVisible()
-    
+	
     return true
   }
   

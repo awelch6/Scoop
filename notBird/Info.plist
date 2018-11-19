@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Scoop uses Location Services to find scooters near you. 🛴</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Scoop uses Location Services to find scooters near you. 🛴</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

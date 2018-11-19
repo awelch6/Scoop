@@ -10,7 +10,10 @@ class LimeAuthenticationService {
 	
 	typealias LimeAuthCompletionBlock = (Error?) -> Void
 	
-	public func retreiveVerificationCode(with phone: String, completion: @escaping LimeAuthCompletionBlock) {
+	public func retreiveVerificationCode(completion: @escaping LimeAuthCompletionBlock) {
+		
+		let phone = UserDefaults.standard.value(forKey: Constants.PHN_KEY) as Any
+		
 		let headers: HTTPHeaders = [
 			"Content-Type" : "application/json"
 		]
@@ -71,5 +74,6 @@ class LimeAuthenticationService {
 		let userDefaults = UserDefaults.standard
 		userDefaults.set(limeAuthentication.token, forKey: LimeConstants.LME_TKN)
 		userDefaults.set(limeAuthentication.id, forKey: LimeConstants.LME_ID)
+		userDefaults.set(limeAuthentication.user_token ?? "", forKey: LimeConstants.LME_USR_TKN)
 	}
 }

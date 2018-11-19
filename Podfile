@@ -9,7 +9,9 @@ target 'notBird' do
   pod 'SnapKit'
   pod 'lottie-ios'
   pod 'PhoneNumberKit', '~> 2.5'
-  # Pods for notBird
+  pod 'JWTDecode', '~> 2.1'
+ 
+ # Pods for notBird
 
   target 'notBirdTests' do
     inherit! :search_paths

@@ -4,7 +4,7 @@
 //
 
 
-import Foundation
+import CoreLocation.CLLocation
 import Alamofire
 
 class BirdService {
@@ -12,19 +12,19 @@ class BirdService {
 	
 	typealias BirdResponseCompletionBlock = ([Birds]?) -> Void
 	
-	public func getBirdLocations(completion: @escaping BirdResponseCompletionBlock) {
+	public func getBirdLocations(location: CLLocationCoordinate2D, completion: @escaping BirdResponseCompletionBlock) {
 		
 		let token = UserDefaults.standard.value(forKey: BirdConstants.BRD_TKN) as! String
 
 		let headers: HTTPHeaders = [
 			"Authorization" : "Bird \(token)",
 			"App-Version" : "3.0.5",
-			"Location" : "{\"latitude\":42.332950,\"longitude\":-83.049454,\"altitude\":500,\"accuracy\":100,\"speed\":-1,\"heading\":-1}"
+			"Location" : "{\"latitude\":\(location.latitude),\"longitude\":\(location.longitude),\"altitude\":500,\"accuracy\":100,\"speed\":-1,\"heading\":-1}"
 		]
 		
 		let params : [String : Any] = [
-			"latitude": 42.332950,
-			"longitude": -83.049454,
+			"latitude": location.latitude,
+			"longitude": location.longitude,
 			"radius": 1000
 		]
 		
